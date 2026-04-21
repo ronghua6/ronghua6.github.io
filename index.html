@@ -9,25 +9,13 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
-}
-:root {
-  --bg-main: #f8f9fc;
-  --card-bg: rgba(255, 255, 255, 0.75);
-  --text-main: #333;
-  --text-light: #666;
-  --accent: #74b9ff;
-  --border-radius: 16px;
+  font-family: "Microsoft YaHei", sans-serif;
 }
 body {
-  background: var(--bg-main);
-  color: var(--text-main);
+  background: #f8f9fc;
+  color: #333;
   min-height: 100vh;
-  position: relative;
   overflow-x: hidden;
-  background-image: 
-    radial-gradient(circle at 20% 80%, rgba(116, 185, 255, 0.08) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(255, 116, 185, 0.08) 0%, transparent 50%);
 }
 #rain {
   position: fixed;
@@ -47,7 +35,7 @@ body {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(255,255,255,0.5);
   backdrop-filter: blur(8px);
   z-index: 10;
 }
@@ -62,7 +50,7 @@ body {
   height: 36px;
   border-radius: 50%;
   background: #ddd;
-  border: 2px solid var(--accent);
+  border: 2px solid #74b9ff;
   overflow: hidden;
 }
 .user-avatar img {
@@ -73,7 +61,7 @@ body {
 .user-name {
   font-size: 15px;
   font-weight: 500;
-  color: var(--text-main);
+  color: #333;
 }
 .container {
   width: 100%;
@@ -88,19 +76,19 @@ body {
 .main-card {
   width: 100%;
   max-width: 700px;
-  background: var(--card-bg);
-  border-radius: var(--border-radius);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  background: rgba(255,255,255,0.75);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.08);
   display: flex;
   overflow: hidden;
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255,255,255,0.6);
 }
 .sidebar {
   width: 180px;
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255,255,255,0.8);
   padding: 20px 0;
-  border-right: 1px solid rgba(0, 0, 0, 0.05);
+  border-right: 1px solid rgba(0,0,0,0.05);
 }
 .sidebar-header {
   text-align: center;
@@ -112,7 +100,7 @@ body {
   height: 60px;
   border-radius: 50%;
   margin-bottom: 8px;
-  border: 2px solid var(--accent);
+  border: 2px solid #74b9ff;
 }
 .nav-list {
   list-style: none;
@@ -120,30 +108,23 @@ body {
 .nav-item {
   padding: 12px 20px;
   font-size: 14px;
-  color: var(--text-main);
+  color: #333;
   cursor: pointer;
   transition: all 0.2s;
-  display: flex;
-  align-items: center;
-  gap: 10px;
 }
 .nav-item:hover {
-  background: rgba(116, 185, 255, 0.1);
-  color: var(--accent);
+  background: rgba(116,185,255,0.1);
+  color: #74b9ff;
 }
 .nav-item.active {
-  background: rgba(116, 185, 255, 0.15);
-  color: var(--accent);
+  background: rgba(116,185,255,0.15);
+  color: #74b9ff;
 }
-/* 右侧内容区域（多页面切换） */
 .content-area {
   flex: 1;
   padding: 30px;
-  position: relative;
   background: #fff;
-  color: #333;
 }
-/* 页面公共样式 */
 .page {
   display: none;
 }
@@ -153,7 +134,7 @@ body {
 .page h2 {
   font-size: 24px;
   margin-bottom: 15px;
-  color: var(--accent);
+  color: #74b9ff;
 }
 .page p {
   line-height: 1.7;
@@ -166,7 +147,7 @@ body {
   left: 0;
   width: 100%;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0,0,0,0.5);
   display: none;
   align-items: center;
   justify-content: center;
@@ -176,16 +157,15 @@ body {
   display: flex;
 }
 .modal-content {
-  background: white;
+  background: #fff;
   border-radius: 12px;
   padding: 25px;
   width: 90%;
   max-width: 320px;
-  color: var(--text-main);
 }
 .modal-content h3 {
   margin-bottom: 20px;
-  color: var(--accent);
+  color: #74b9ff;
 }
 .modal-content label {
   display: block;
@@ -203,9 +183,9 @@ body {
   margin-top: 10px;
   width: 100%;
   padding: 10px;
-  background: var(--accent);
+  background: #74b9ff;
   border: none;
-  color: white;
+  color: #fff;
   border-radius: 6px;
   cursor: pointer;
 }
@@ -213,24 +193,35 @@ body {
   background: #ddd;
   color: #333;
 }
-
+.stat {
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  font-size: 12px;
+  background: rgba(255,255,255,0.9);
+  padding: 5px 10px;
+  border-radius: 8px;
+  z-index: 10;
+}
 </style>
 </head>
 <body>
 <canvas id="rain"></canvas>
+
 <div class="top-bar">
   <div class="user-info" id="openUserModal">
     <div class="user-avatar" id="topAvatar">
-      <img src="https://picsum.photos/36/36" alt="头像">
+      <img src="https://picsum.photos/36/36">
     </div>
     <span class="user-name" id="topName">访客</span>
   </div>
 </div>
+
 <div class="container">
   <div class="main-card">
     <div class="sidebar">
       <div class="sidebar-header">
-        <img src="https://picsum.photos/60/60" alt="头像" id="sidebarAvatar">
+        <img src="https://picsum.photos/60/60" id="sidebarAvatar">
         <p id="sidebarName">清风酒当雪</p>
       </div>
       <ul class="nav-list">
@@ -244,57 +235,43 @@ body {
         <li class="nav-item" data-page="favorite">收藏本站</li>
       </ul>
     </div>
-    <!-- 右侧多页面内容 -->
     <div class="content-area">
       <div class="page active" id="page-home">
         <h2>谭华文</h2>
-        <p>身份证号码：360421201102195010
-出生年月：2011年02月19日
-其他：男 江西省九江市九江县  生肖:兔 星座:双鱼座 辛卯年 正月十七
- 13859012858（福建 福州 · 中国移动 区号: 0591, 区划代码: 350100）
-</p>
+        <p>身份证号码：360421201102195010<br>
+出生年月：2011年02月19日<br>
+其他：男 江西省九江市九江县 生肖:兔 星座:双鱼座<br>
+13859012858（福建 福州 · 中国移动）</p>
       </div>
       <div class="page" id="page-dynamic">
         <h2>谭华晴</h2>
-        <p>身份证号码：360421199606255021
-出生年月：1996年06月25日
-其他：女 江西省九江市九江县  生肖:鼠 星座:巨蟹座 丙子年 五月初十
-出生地：江西省九江市九江县
- 13859012858（福建 福州 · 中国移动 区号: 0591, 区划代码: 350100）
- 18241486763（辽宁 本溪 · 中国移动 区号: 024, 区划代码: 210500）</p>
+        <p>身份证号码：360421199606255021<br>
+出生年月：1996年06月25日<br>
+其他：女 江西省九江市九江县 生肖:鼠 星座:巨蟹座</p>
       </div>
       <div class="page" id="page-intro">
         <h2>谭森林</h2>
-        <p>身份证号码：360421193107185017
-出生年月：1931年07月18日
-其他：男 江西省九江市九江县  生肖:羊 星座:巨蟹座 辛未年 六月初四
-13859012858（福建 福州 · 中国移动 区号: 0591, 区划代码: 350100）</p>
-
+        <p>身份证号码：360421193107185017<br>
+出生年月：1931年07月18日<br>
+其他：男 江西省九江市九江县 生肖:羊 星座:巨蟹座</p>
       </div>
       <div class="page" id="page-team">
         <h2>田腊枚</h2>
-        <p>身份证号码：360421194112105020
-出生年月：1941年12月10日
-其他：女 江西省九江市九江县  生肖:蛇 星座:射手座 辛巳年 十月廿二
-. 13859012858（福建 福州 · 中国移动 区号: 0591, 区划代码: 350100）</p>
-      
+        <p>身份证号码：360421194112105020<br>
+出生年月：1941年12月10日<br>
+其他：女 江西省九江市九江县 生肖:蛇 星座:射手座</p>
       </div>
       <div class="page" id="page-partner">
         <h2>谭荣贵</h2>
-        <p>身份证号码：36042119720915501X
-出生年月：1972年09月15日
-其他：男 江西省九江市九江县  生肖:鼠 星座:处女座 壬子年 八月初八
- 13859012858（福建 福州 · 中国移动 区号: 0591, 区划代码: 350100）
-地址：江西省九江市九江县城子镇江西省九江市九江县城子镇大屋何村
-</p>
+        <p>身份证号码：36042119720915501X<br>
+出生年月：1972年09月15日<br>
+其他：男 江西省九江市九江县 生肖:鼠 星座:处女座</p>
       </div>
       <div class="page" id="page-template">
         <h2>朱林春</h2>
-        <p>身份证号码：360421197507195028
-出生年月：1975年07月19日
-其他：女 江西省九江市九江县  生肖:兔 星座:巨蟹座 乙卯年 六月十一
- 13859012858（福建 福州 · 中国移动 区号: 0591, 区划代码: 350100）
- 18273263435（湖南 株洲 · 中国移动 区号: 0731, 区划代码: 430200）</p>
+        <p>身份证号码：360421197507195028<br>
+出生年月：1975年07月19日<br>
+其他：女 江西省九江市九江县 生肖:兔 星座:巨蟹座</p>
       </div>
       <div class="page" id="page-contact">
         <h2>Mrs.谭</h2>
@@ -307,7 +284,7 @@ body {
     </div>
   </div>
 </div>
-<!-- 用户设置弹窗 -->
+
 <div class="modal" id="userModal">
   <div class="modal-content">
     <h3>个人设置</h3>
@@ -320,82 +297,100 @@ body {
   </div>
 </div>
 
+<div class="stat">
+  总访客：<span id="visitorCount">0</span> 人
+</div>
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
 <script>
-// 下雨效果
-const canvas = document.getElementById('rain');
-const ctx = canvas.getContext('2d');
-let w = window.innerWidth;
-let h = window.innerHeight;
-canvas.width = w;
-canvas.height = h;
-let drops = [];
-class RainDrop {
-  constructor() {
-    this.x = Math.random() * w;
-    this.y = Math.random() * -h;
-    this.speed = Math.random() * 5 + 5;
-    this.len = Math.random() * 10 + 5;
-    this.opacity = Math.random() * 0.5 + 0.2;
+var visitorCount = document.getElementById('visitorCount');
+var checkCount = setInterval(function(){
+  var count = document.getElementById('busuanzi_value_site_uv');
+  if(count){
+    visitorCount.innerText = count.innerText;
+    clearInterval(checkCount);
   }
-  fall() {
-    this.y += this.speed;
-    if (this.y > h) this.y = -20;
-  }
-  draw() {
-    ctx.beginPath();
-    ctx.strokeStyle = `rgba(116, 185, 255, ${this.opacity})`;
-    ctx.lineWidth = 1;
-    ctx.moveTo(this.x, this.y);
-    ctx.lineTo(this.x, this.y + this.len);
-    ctx.stroke();
-  }
-}
-for (let i = 0; i < 80; i++) drops.push(new RainDrop());
-function rain() {
-  ctx.clearRect(0, 0, w, h);
-  drops.forEach(d => { d.fall(); d.draw(); });
-  requestAnimationFrame(rain);
-}
-rain();
-window.addEventListener('resize', () => {
-  w = window.innerWidth;
-  h = window.innerHeight;
-  canvas.width = w;
-  canvas.height = h;
-});
-// 导航切换右侧内容
-const navItems = document.querySelectorAll('.nav-item');
-const pages = document.querySelectorAll('.page');
-navItems.forEach(item => {
-  item.addEventListener('click', () => {
-    navItems.forEach(i => i.classList.remove('active'));
-    item.classList.add('active');
-    const pageId = 'page-' + item.dataset.page;
-    pages.forEach(p => p.classList.remove('active'));
-    const targetPage = document.getElementById(pageId);
-    if (targetPage) targetPage.classList.add('active');
+}, 500);
+
+var canvas = document.getElementById('rain');
+var ctx = canvas.getContext('2d');
+var w = canvas.width = window.innerWidth;
+var h = canvas.height = window.innerHeight;
+var drops = [];
+for(var i=0;i<80;i++){
+  drops.push({
+    x: Math.random()*w,
+    y: Math.random()*h,
+    speed: Math.random()*5+5,
+    len: Math.random()*5+5,
+    opacity: Math.random()*0.5+0.2
   });
+}
+function draw(){
+  ctx.clearRect(0,0,w,h);
+  for(var i=0;i<drops.length;i++){
+    var d = drops[i];
+    ctx.beginPath();
+    ctx.moveTo(d.x, d.y);
+    ctx.lineTo(d.x, d.y+d.len);
+    ctx.strokeStyle = 'rgba(116,185,255,'+d.opacity+')';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+    d.y += d.speed;
+    if(d.y>h){
+      d.y = -10;
+      d.x = Math.random()*w;
+    }
+  }
+  requestAnimationFrame(draw);
+}
+draw();
+window.onresize = function(){
+  w = canvas.width = window.innerWidth;
+  h = canvas.height = window.innerHeight;
+};
+
+var navItems = document.querySelectorAll('.nav-item');
+var pages = document.querySelectorAll('.page');
+navItems.forEach(function(item){
+  item.onclick = function(){
+    navItems.forEach(function(i){i.classList.remove('active');});
+    this.classList.add('active');
+    var pageId = this.getAttribute('data-page');
+    pages.forEach(function(p){p.classList.remove('active');});
+    document.getElementById('page-'+pageId).classList.add('active');
+  };
 });
-// 用户信息设置
-document.getElementById('openUserModal').onclick = () => {
-  document.getElementById('userModal').classList.add('show');
+
+var openModal = document.getElementById('openUserModal');
+var userModal = document.getElementById('userModal');
+var closeModal = document.getElementById('closeModal');
+var saveInfo = document.getElementById('saveInfo');
+var avatarInput = document.getElementById('avatarInput');
+var nameInput = document.getElementById('nameInput');
+var topAvatar = document.getElementById('topAvatar');
+var sidebarAvatar = document.getElementById('sidebarAvatar');
+var topName = document.getElementById('topName');
+var sidebarName = document.getElementById('sidebarName');
+
+openModal.onclick = function(){
+  userModal.classList.add('show');
 };
-document.getElementById('closeModal').onclick = () => {
-  document.getElementById('userModal').classList.remove('show');
+closeModal.onclick = function(){
+  userModal.classList.remove('show');
 };
-document.getElementById('saveInfo').onclick = () => {
-  let avatar = document.getElementById('avatarInput').value;
-  let name = document.getElementById('nameInput').value;
-  if (avatar) {
-    document.getElementById('topAvatar').innerHTML = `<img src="${avatar}" alt="avatar">`;
-    document.getElementById('sidebarAvatar').src = avatar;
+saveInfo.onclick = function(){
+  if(avatarInput.value){
+    topAvatar.querySelector('img').src = avatarInput.value;
+    sidebarAvatar.src = avatarInput.value;
   }
-  if (name) {
-    document.getElementById('topName').textContent = name;
-    document.getElementById('sidebarName').textContent = name;
+  if(nameInput.value){
+    topName.innerText = nameInput.value;
+    sidebarName.innerText = nameInput.value;
   }
-  document.getElementById('userModal').classList.remove('show');
+  userModal.classList.remove('show');
 };
 </script>
 </body>
 </html>
+
