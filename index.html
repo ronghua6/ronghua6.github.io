@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mrs 谭</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
+}
+:root {
+  --bg-main: #f8f9fc;
+  --card-bg: rgba(255, 255, 255, 0.75);
+  --text-main: #333;
+  --text-light: #666;
+  --accent: #74b9ff;
+  --border-radius: 16px;
+}
+body {
+  background: var(--bg-main);
+  color: var(--text-main);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  background-image: 
+    radial-gradient(circle at 20% 80%, rgba(116, 185, 255, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 116, 185, 0.08) 0%, transparent 50%);
+}
+#rain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+.top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(8px);
+  z-index: 10;
+}
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+.user-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #ddd;
+  border: 2px solid var(--accent);
+  overflow: hidden;
+}
+.user-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.user-name {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-main);
+}
+.container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px 20px;
+  position: relative;
+  z-index: 2;
+}
+.main-card {
+  width: 100%;
+  max-width: 700px;
+  background: var(--card-bg);
+  border-radius: var(--border-radius);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  display: flex;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+.sidebar {
+  width: 180px;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 20px 0;
+  border-right: 1px solid rgba(0, 0, 0, 0.05);
+}
+.sidebar-header {
+  text-align: center;
+  padding: 15px;
+  margin-bottom: 10px;
+}
+.sidebar-header img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-bottom: 8px;
+  border: 2px solid var(--accent);
+}
+.nav-list {
+  list-style: none;
+}
+.nav-item {
+  padding: 12px 20px;
+  font-size: 14px;
+  color: var(--text-main);
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.nav-item:hover {
+  background: rgba(116, 185, 255, 0.1);
+  color: var(--accent);
+}
+.nav-item.active {
+  background: rgba(116, 185, 255, 0.15);
+  color: var(--accent);
+}
+/* 右侧内容区域（多页面切换） */
+.content-area {
+  flex: 1;
+  padding: 30px;
+  position: relative;
+  background: #fff;
+  color: #333;
+}
+/* 页面公共样式 */
+.page {
+  display: none;
+}
+.page.active {
+  display: block;
+}
+.page h2 {
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: var(--accent);
+}
+.page p {
+  line-height: 1.7;
+  margin-bottom: 10px;
+  font-size: 15px;
+}
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+.modal.show {
+  display: flex;
+}
+.modal-content {
+  background: white;
+  border-radius: 12px;
+  padding: 25px;
+  width: 90%;
+  max-width: 320px;
+  color: var(--text-main);
+}
+.modal-content h3 {
+  margin-bottom: 20px;
+  color: var(--accent);
+}
+.modal-content label {
+  display: block;
+  margin: 10px 0 5px;
+  font-size: 14px;
+}
+.modal-content input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+}
+.modal-btn {
+  margin-top: 10px;
+  width: 100%;
+  padding: 10px;
+  background: var(--accent);
+  border: none;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.modal-btn.gray {
+  background: #ddd;
+  color: #333;
+}
+
+</style>
+</head>
+<body>
+<canvas id="rain"></canvas>
+<div class="top-bar">
+  <div class="user-info" id="openUserModal">
+    <div class="user-avatar" id="topAvatar">
+      <img src="https://picsum.photos/36/36" alt="头像">
+    </div>
+    <span class="user-name" id="topName">访客</span>
+  </div>
+</div>
+<div class="container">
+  <div class="main-card">
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <img src="https://picsum.photos/60/60" alt="头像" id="sidebarAvatar">
+        <p id="sidebarName">清风酒当雪</p>
+      </div>
+      <ul class="nav-list">
+        <li class="nav-item active" data-page="home">谭华文</li>
+        <li class="nav-item" data-page="dynamic">谭华晴</li>
+        <li class="nav-item" data-page="intro">谭森林</li>
+        <li class="nav-item" data-page="team">田腊枚</li>
+        <li class="nav-item" data-page="partner">谭荣贵</li>
+        <li class="nav-item" data-page="template">朱林春</li>
+        <li class="nav-item" data-page="contact">联系我们</li>
+        <li class="nav-item" data-page="favorite">收藏本站</li>
+      </ul>
+    </div>
+    <!-- 右侧多页面内容 -->
+    <div class="content-area">
+      <div class="page active" id="page-home">
+        <h2>谭华文</h2>
+        <p>身份证号码：360421201102195010
+出生年月：2011年02月19日
+其他：男 江西省九江市九江县  生肖:兔 星座:双鱼座 辛卯年 正月十七
+ 13859012858（福建 福州 · 中国移动 区号: 0591, 区划代码: 350100）
+</p>
+      </div>
+      <div class="page" id="page-dynamic">
+        <h2>谭华晴</h2>
+        <p>身份证号码：360421199606255021
+出生年月：1996年06月25日
+其他：女 江西省九江市九江县  生肖:鼠 星座:巨蟹座 丙子年 五月初十
+出生地：江西省九江市九江县
+ 13859012858（福建 福州 · 中国移动 区号: 0591, 区划代码: 350100）
+ 18241486763（辽宁 本溪 · 中国移动 区号: 024, 区划代码: 210500）</p>
+      </div>
+      <div class="page" id="page-intro">
+        <h2>谭森林</h2>
+        <p>身份证号码：360421193107185017
+出生年月：1931年07月18日
+其他：男 江西省九江市九江县  生肖:羊 星座:巨蟹座 辛未年 六月初四
+13859012858（福建 福州 · 中国移动 区号: 0591, 区划代码: 350100）</p>
+
+      </div>
+      <div class="page" id="page-team">
+        <h2>田腊枚</h2>
+        <p>身份证号码：360421194112105020
+出生年月：1941年12月10日
+其他：女 江西省九江市九江县  生肖:蛇 星座:射手座 辛巳年 十月廿二
+. 13859012858（福建 福州 · 中国移动 区号: 0591, 区划代码: 350100）</p>
+      
+      </div>
+      <div class="page" id="page-partner">
+        <h2>谭荣贵</h2>
+        <p>身份证号码：36042119720915501X
+出生年月：1972年09月15日
+其他：男 江西省九江市九江县  生肖:鼠 星座:处女座 壬子年 八月初八
+ 13859012858（福建 福州 · 中国移动 区号: 0591, 区划代码: 350100）
+地址：江西省九江市九江县城子镇江西省九江市九江县城子镇大屋何村
+</p>
+      </div>
+      <div class="page" id="page-template">
+        <h2>朱林春</h2>
+        <p>身份证号码：360421197507195028
+出生年月：1975年07月19日
+其他：女 江西省九江市九江县  生肖:兔 星座:巨蟹座 乙卯年 六月十一
+ 13859012858（福建 福州 · 中国移动 区号: 0591, 区划代码: 350100）
+ 18273263435（湖南 株洲 · 中国移动 区号: 0731, 区划代码: 430200）</p>
+      </div>
+      <div class="page" id="page-contact">
+        <h2>Mrs.谭</h2>
+        <p>邮箱：3682914819@qq.com</p>
+      </div>
+      <div class="page" id="page-favorite">
+        <h2>收藏本站</h2>
+        <p>Ctrl+D 即可收藏本页面，方便下次访问～</p>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 用户设置弹窗 -->
+<div class="modal" id="userModal">
+  <div class="modal-content">
+    <h3>个人设置</h3>
+    <label>头像链接</label>
+    <input type="text" id="avatarInput" placeholder="输入头像URL">
+    <label>昵称</label>
+    <input type="text" id="nameInput" placeholder="输入昵称">
+    <button class="modal-btn" id="saveInfo">保存</button>
+    <button class="modal-btn gray" id="closeModal">关闭</button>
+  </div>
+</div>
+
+<script>
+// 下雨效果
+const canvas = document.getElementById('rain');
+const ctx = canvas.getContext('2d');
+let w = window.innerWidth;
+let h = window.innerHeight;
+canvas.width = w;
+canvas.height = h;
+let drops = [];
+class RainDrop {
+  constructor() {
+    this.x = Math.random() * w;
+    this.y = Math.random() * -h;
+    this.speed = Math.random() * 5 + 5;
+    this.len = Math.random() * 10 + 5;
+    this.opacity = Math.random() * 0.5 + 0.2;
+  }
+  fall() {
+    this.y += this.speed;
+    if (this.y > h) this.y = -20;
+  }
+  draw() {
+    ctx.beginPath();
+    ctx.strokeStyle = `rgba(116, 185, 255, ${this.opacity})`;
+    ctx.lineWidth = 1;
+    ctx.moveTo(this.x, this.y);
+    ctx.lineTo(this.x, this.y + this.len);
+    ctx.stroke();
+  }
+}
+for (let i = 0; i < 80; i++) drops.push(new RainDrop());
+function rain() {
+  ctx.clearRect(0, 0, w, h);
+  drops.forEach(d => { d.fall(); d.draw(); });
+  requestAnimationFrame(rain);
+}
+rain();
+window.addEventListener('resize', () => {
+  w = window.innerWidth;
+  h = window.innerHeight;
+  canvas.width = w;
+  canvas.height = h;
+});
+// 导航切换右侧内容
+const navItems = document.querySelectorAll('.nav-item');
+const pages = document.querySelectorAll('.page');
+navItems.forEach(item => {
+  item.addEventListener('click', () => {
+    navItems.forEach(i => i.classList.remove('active'));
+    item.classList.add('active');
+    const pageId = 'page-' + item.dataset.page;
+    pages.forEach(p => p.classList.remove('active'));
+    const targetPage = document.getElementById(pageId);
+    if (targetPage) targetPage.classList.add('active');
+  });
+});
+// 用户信息设置
+document.getElementById('openUserModal').onclick = () => {
+  document.getElementById('userModal').classList.add('show');
+};
+document.getElementById('closeModal').onclick = () => {
+  document.getElementById('userModal').classList.remove('show');
+};
+document.getElementById('saveInfo').onclick = () => {
+  let avatar = document.getElementById('avatarInput').value;
+  let name = document.getElementById('nameInput').value;
+  if (avatar) {
+    document.getElementById('topAvatar').innerHTML = `<img src="${avatar}" alt="avatar">`;
+    document.getElementById('sidebarAvatar').src = avatar;
+  }
+  if (name) {
+    document.getElementById('topName').textContent = name;
+    document.getElementById('sidebarName').textContent = name;
+  }
+  document.getElementById('userModal').classList.remove('show');
+};
+</script>
+</body>
+</html>
