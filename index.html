@@ -5,392 +5,130 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mrs 谭</title>
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Microsoft YaHei", sans-serif;
-}
-body {
-  background: #f8f9fc;
-  color: #333;
-  min-height: 100vh;
-  overflow-x: hidden;
-}
-#rain {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  pointer-events: none;
-}
-.top-bar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  padding: 15px 20px;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  background: rgba(255,255,255,0.5);
-  backdrop-filter: blur(8px);
-  z-index: 10;
-}
-.user-info {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  cursor: pointer;
-}
-.user-avatar {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: #ddd;
-  border: 2px solid #74b9ff;
-  overflow: hidden;
-}
-.user-avatar img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.user-name {
-  font-size: 15px;
-  font-weight: 500;
-  color: #333;
-}
-.container {
-  width: 100%;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 80px 20px 20px;
-  position: relative;
-  z-index: 2;
-}
-.main-card {
-  width: 100%;
-  max-width: 700px;
-  background: rgba(255,255,255,0.75);
-  border-radius: 16px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.08);
-  display: flex;
-  overflow: hidden;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255,255,255,0.6);
-}
-.sidebar {
-  width: 180px;
-  background: rgba(255,255,255,0.8);
-  padding: 20px 0;
-  border-right: 1px solid rgba(0,0,0,0.05);
-}
-.sidebar-header {
-  text-align: center;
-  padding: 15px;
-  margin-bottom: 10px;
-}
-.sidebar-header img {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  margin-bottom: 8px;
-  border: 2px solid #74b9ff;
-}
-.nav-list {
-  list-style: none;
-}
-.nav-item {
-  padding: 12px 20px;
-  font-size: 14px;
-  color: #333;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-.nav-item:hover {
-  background: rgba(116,185,255,0.1);
-  color: #74b9ff;
-}
-.nav-item.active {
-  background: rgba(116,185,255,0.15);
-  color: #74b9ff;
-}
-.content-area {
-  flex: 1;
-  padding: 30px;
-  background: #fff;
-}
-.page {
-  display: none;
-}
-.page.active {
-  display: block;
-}
-.page h2 {
-  font-size: 24px;
-  margin-bottom: 15px;
-  color: #74b9ff;
-}
-.page p {
-  line-height: 1.7;
-  margin-bottom: 10px;
-  font-size: 15px;
-}
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background: rgba(0,0,0,0.5);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 100;
-}
-.modal.show {
-  display: flex;
-}
-.modal-content {
-  background: #fff;
-  border-radius: 12px;
-  padding: 25px;
-  width: 90%;
-  max-width: 320px;
-}
-.modal-content h3 {
-  margin-bottom: 20px;
-  color: #74b9ff;
-}
-.modal-content label {
-  display: block;
-  margin: 10px 0 5px;
-  font-size: 14px;
-}
-.modal-content input {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  font-size: 14px;
-}
-.modal-btn {
-  margin-top: 10px;
-  width: 100%;
-  padding: 10px;
-  background: #74b9ff;
-  border: none;
-  color: #fff;
-  border-radius: 6px;
-  cursor: pointer;
-}
-.modal-btn.gray {
-  background: #ddd;
-  color: #333;
-}
-.stat {
-  position: fixed;
-  bottom: 10px;
-  left: 10px;
-  font-size: 12px;
-  background: rgba(255,255,255,0.9);
-  padding: 5px 10px;
-  border-radius: 8px;
-  z-index: 10;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:"Microsoft YaHei",sans-serif}
+body{background:#f8f9fc;color:#333;min-height:100vh;overflow-x:hidden}
+#rain{position:fixed;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none}
+.top-bar{position:fixed;top:0;left:0;width:100%;padding:15px 20px;display:flex;justify-content:flex-end;align-items:center;background:rgba(255,255,255,.5);backdrop-filter:blur(8px);z-index:10}
+.user-info{display:flex;align-items:center;gap:10px;cursor:pointer}
+.user-avatar{width:36px;height:36px;border-radius:50%;background:#ddd;border:2px solid #74b9ff;overflow:hidden}
+.user-avatar img{width:100%;height:100%;object-fit:cover}
+.user-name{font-size:15px;font-weight:500;color:#333}
+.container{width:100%;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:80px 20px 20px;position:relative;z-index:2}
+.main-card{width:100%;max-width:700px;background:rgba(255,255,255,.75);border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,.08);display:flex;overflow:hidden;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.6)}
+.sidebar{width:180px;background:rgba(255,255,255,.8);padding:20px 0;border-right:1px solid rgba(0,0,0,.05)}
+.sidebar-header{text-align:center;padding:15px;margin-bottom:10px}
+.sidebar-header img{width:60px;height:60px;border-radius:50%;margin-bottom:8px;border:2px solid #74b9ff}
+.nav-list{list-style:none}
+.nav-item{padding:12px 20px;font-size:14px;color:#333;cursor:pointer;transition:all .2s}
+.nav-item:hover{background:rgba(116,185,255,.1);color:#74b9ff}
+.nav-item.active{background:rgba(116,185,255,.15);color:#74b9ff}
+.content-area{flex:1;padding:30px;background:#fff}
+.page{display:none}
+.page.active{display:block}
+.page h2{font-size:24px;margin-bottom:15px;color:#74b9ff}
+.page p{line-height:1.7;margin-bottom:10px;font-size:15px}
+.modal{position:fixed;top:0;left:0;width:100%;height:100vh;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:100}
+.modal.show{display:flex}
+.modal-content{background:#fff;border-radius:12px;padding:25px;width:90%;max-width:320px}
+.modal-content h3{margin-bottom:20px;color:#74b9ff}
+.modal-content label{display:block;margin:10px 0 5px;font-size:14px}
+.modal-content input{width:100%;padding:8px;border:1px solid #ddd;border-radius:6px;font-size:14px}
+.modal-btn{margin-top:10px;width:100%;padding:10px;background:#74b9ff;border:none;color:#fff;border-radius:6px;cursor:pointer}
+.modal-btn.gray{background:#ddd;color:#333}
+.foot{position:fixed;bottom:10px;left:10px;font-size:12px;background:#fff;padding:5px 10px;border-radius:8px}
 </style>
 </head>
 <body>
 <canvas id="rain"></canvas>
-
 <div class="top-bar">
-  <div class="user-info" id="openUserModal">
-    <div class="user-avatar" id="topAvatar">
-      <img src="https://picsum.photos/36/36">
-    </div>
-    <span class="user-name" id="topName">访客</span>
-  </div>
+<div class="user-info" id="openUserModal">
+<div class="user-avatar" id="topAvatar"><img src="https://picsum.photos/36/36"></div>
+<span class="user-name" id="topName">访客</span>
 </div>
-
+</div>
 <div class="container">
-  <div class="main-card">
-    <div class="sidebar">
-      <div class="sidebar-header">
-        <img src="https://picsum.photos/60/60" id="sidebarAvatar">
-        <p id="sidebarName">清风酒当雪</p>
-      </div>
-      <ul class="nav-list">
-        <li class="nav-item active" data-page="home">谭华文</li>
-        <li class="nav-item" data-page="dynamic">谭华晴</li>
-        <li class="nav-item" data-page="intro">谭森林</li>
-        <li class="nav-item" data-page="team">田腊枚</li>
-        <li class="nav-item" data-page="partner">谭荣贵</li>
-        <li class="nav-item" data-page="template">朱林春</li>
-        <li class="nav-item" data-page="contact">联系我们</li>
-        <li class="nav-item" data-page="favorite">收藏本站</li>
-      </ul>
-    </div>
-    <div class="content-area">
-      <div class="page active" id="page-home">
-        <h2>谭华文</h2>
-        <p>身份证号码：360421201102195010<br>
-出生年月：2011年02月19日<br>
-其他：男 江西省九江市九江县 生肖:兔 星座:双鱼座<br>
-13859012858（福建 福州 · 中国移动）</p>
-      </div>
-      <div class="page" id="page-dynamic">
-        <h2>谭华晴</h2>
-        <p>身份证号码：360421199606255021<br>
-出生年月：1996年06月25日<br>
-其他：女 江西省九江市九江县 生肖:鼠 星座:巨蟹座</p>
-      </div>
-      <div class="page" id="page-intro">
-        <h2>谭森林</h2>
-        <p>身份证号码：360421193107185017<br>
-出生年月：1931年07月18日<br>
-其他：男 江西省九江市九江县 生肖:羊 星座:巨蟹座</p>
-      </div>
-      <div class="page" id="page-team">
-        <h2>田腊枚</h2>
-        <p>身份证号码：360421194112105020<br>
-出生年月：1941年12月10日<br>
-其他：女 江西省九江市九江县 生肖:蛇 星座:射手座</p>
-      </div>
-      <div class="page" id="page-partner">
-        <h2>谭荣贵</h2>
-        <p>身份证号码：36042119720915501X<br>
-出生年月：1972年09月15日<br>
-其他：男 江西省九江市九江县 生肖:鼠 星座:处女座</p>
-      </div>
-      <div class="page" id="page-template">
-        <h2>朱林春</h2>
-        <p>身份证号码：360421197507195028<br>
-出生年月：1975年07月19日<br>
-其他：女 江西省九江市九江县 生肖:兔 星座:巨蟹座</p>
-      </div>
-      <div class="page" id="page-contact">
-        <h2>Mrs.谭</h2>
-        <p>邮箱：3682914819@qq.com</p>
-      </div>
-      <div class="page" id="page-favorite">
-        <h2>收藏本站</h2>
-        <p>Ctrl+D 即可收藏本页面，方便下次访问～</p>
-      </div>
-    </div>
-  </div>
+<div class="main-card">
+<div class="sidebar">
+<div class="sidebar-header"><img src="https://picsum.photos/60/60" id="sidebarAvatar"><p id="sidebarName">清风酒当雪</p></div>
+<ul class="nav-list">
+<li class="nav-item active" data-page="home">谭华文</li>
+<li class="nav-item" data-page="dynamic">谭华晴</li>
+<li class="nav-item" data-page="intro">谭森林</li>
+<li class="nav-item" data-page="team">田腊枚</li>
+<li class="nav-item" data-page="partner">谭荣贵</li>
+<li class="nav-item" data-page="template">朱林春</li>
+<li class="nav-item" data-page="contact">联系我们</li>
+<li class="nav-item" data-page="favorite">收藏本站</li>
+</ul>
 </div>
-
+<div class="content-area">
+<div class="page active" id="page-home">
+<h2>谭华文</h2>
+<p>身份证号码：360421201102195010<br>出生年月：2011年02月19日<br>其他：男 江西省九江市九江县 生肖:兔 星座:双鱼座<br>13859012858（福建 福州 · 中国移动）</p>
+</div>
+<div class="page" id="page-dynamic">
+<h2>谭华晴</h2>
+<p>身份证号码：360421199606255021<br>出生年月：1996年06月25日<br>其他：女 江西省九江市九江县 生肖:鼠 星座:巨蟹座</p>
+</div>
+<div class="page" id="page-intro">
+<h2>谭森林</h2>
+<p>身份证号码：360421193107185017<br>出生年月：1931年07月18日<br>其他：男 江西省九江市九江县 生肖:羊 星座:巨蟹座</p>
+</div>
+<div class="page" id="page-team">
+<h2>田腊枚</h2>
+<p>身份证号码：360421194112105020<br>出生年月：1941年12月10日<br>其他：女 江西省九江市九江县 生肖:蛇 星座:射手座</p>
+</div>
+<div class="page" id="page-partner">
+<h2>谭荣贵</h2>
+<p>身份证号码：36042119720915501X<br>出生年月：1972年09月15日<br>其他：男 江西省九江市九江县 生肖:鼠 星座:处女座</p>
+</div>
+<div class="page" id="page-template">
+<h2>朱林春</h2>
+<p>身份证号码：360421197507195028<br>出生年月：1975年07月19日<br>其他：女 江西省九江市九江县 生肖:兔 星座:巨蟹座</p>
+</div>
+<div class="page" id="page-contact">
+<h2>Mrs.谭</h2>
+<p>邮箱：3682914819@qq.com</p>
+</div>
+<div class="page" id="page-favorite">
+<h2>收藏本站</h2>
+<p>Ctrl+D 即可收藏本页面，方便下次访问～</p>
+</div>
+</div>
+</div>
+</div>
 <div class="modal" id="userModal">
-  <div class="modal-content">
-    <h3>个人设置</h3>
-    <label>头像链接</label>
-    <input type="text" id="avatarInput" placeholder="输入头像URL">
-    <label>昵称</label>
-    <input type="text" id="nameInput" placeholder="输入昵称">
-    <button class="modal-btn" id="saveInfo">保存</button>
-    <button class="modal-btn gray" id="closeModal">关闭</button>
-  </div>
+<div class="modal-content">
+<h3>个人设置</h3>
+<label>头像链接</label><input type="text" id="avatarInput" placeholder="输入头像URL">
+<label>昵称</label><input type="text" id="nameInput" placeholder="输入昵称">
+<button class="modal-btn" id="saveInfo">保存</button>
+<button class="modal-btn gray" id="closeModal">关闭</button>
 </div>
-
-<div class="stat">
-  总访客：<span id="visitorCount">0</span> 人
 </div>
-<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
+<div class="foot">总访客：<span id="busuanzi_value_site_uv"></span> 人</div>
+<audio id="bgm" loop>
+<script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 <script>
-var visitorCount = document.getElementById('visitorCount');
-var checkCount = setInterval(function(){
-  var count = document.getElementById('busuanzi_value_site_uv');
-  if(count){
-    visitorCount.innerText = count.innerText;
-    clearInterval(checkCount);
-  }
-}, 500);
-
-var canvas = document.getElementById('rain');
-var ctx = canvas.getContext('2d');
-var w = canvas.width = window.innerWidth;
-var h = canvas.height = window.innerHeight;
-var drops = [];
-for(var i=0;i<80;i++){
-  drops.push({
-    x: Math.random()*w,
-    y: Math.random()*h,
-    speed: Math.random()*5+5,
-    len: Math.random()*5+5,
-    opacity: Math.random()*0.5+0.2
-  });
-}
-function draw(){
-  ctx.clearRect(0,0,w,h);
-  for(var i=0;i<drops.length;i++){
-    var d = drops[i];
-    ctx.beginPath();
-    ctx.moveTo(d.x, d.y);
-    ctx.lineTo(d.x, d.y+d.len);
-    ctx.strokeStyle = 'rgba(116,185,255,'+d.opacity+')';
-    ctx.lineWidth = 1;
-    ctx.stroke();
-    d.y += d.speed;
-    if(d.y>h){
-      d.y = -10;
-      d.x = Math.random()*w;
-    }
-  }
-  requestAnimationFrame(draw);
-}
-draw();
-window.onresize = function(){
-  w = canvas.width = window.innerWidth;
-  h = canvas.height = window.innerHeight;
-};
-
-var navItems = document.querySelectorAll('.nav-item');
-var pages = document.querySelectorAll('.page');
-navItems.forEach(function(item){
-  item.onclick = function(){
-    navItems.forEach(function(i){i.classList.remove('active');});
-    this.classList.add('active');
-    var pageId = this.getAttribute('data-page');
-    pages.forEach(function(p){p.classList.remove('active');});
-    document.getElementById('page-'+pageId).classList.add('active');
-  };
-});
-
-var openModal = document.getElementById('openUserModal');
-var userModal = document.getElementById('userModal');
-var closeModal = document.getElementById('closeModal');
-var saveInfo = document.getElementById('saveInfo');
-var avatarInput = document.getElementById('avatarInput');
-var nameInput = document.getElementById('nameInput');
-var topAvatar = document.getElementById('topAvatar');
-var sidebarAvatar = document.getElementById('sidebarAvatar');
-var topName = document.getElementById('topName');
-var sidebarName = document.getElementById('sidebarName');
-
-openModal.onclick = function(){
-  userModal.classList.add('show');
-};
-closeModal.onclick = function(){
-  userModal.classList.remove('show');
-};
-saveInfo.onclick = function(){
-  if(avatarInput.value){
-    topAvatar.querySelector('img').src = avatarInput.value;
-    sidebarAvatar.src = avatarInput.value;
-  }
-  if(nameInput.value){
-    topName.innerText = nameInput.value;
-    sidebarName.innerText = nameInput.value;
-  }
-  userModal.classList.remove('show');
-};
+var bgm=document.getElementById("bgm");
+bgm.src="https://cdn.captainfill.com/music/faruxue.mp3";
+function play(){bgm.play().catch(function(){})}
+document.addEventListener("click",play,{once:true});
+var canvas=document.getElementById("rain");
+var ctx=canvas.getContext("2d");
+var w=canvas.width=window.innerWidth;
+var h=canvas.height=window.innerHeight;
+var drops=[];
+for(var i=0;i<80;i++){drops.push({x:Math.random()*w,y:Math.random()*-h,speed:Math.random()*5+5,len:Math.random()*5+5,opacity:Math.random()*.5+.2})}
+function rain(){ctx.clearRect(0,0,w,h);drops.forEach(function(d){d.y+=d.speed;if(d.y>h)d.y=-20;ctx.beginPath();ctx.strokeStyle="rgba(116,185,255,"+d.opacity+")";ctx.lineWidth=1;ctx.moveTo(d.x,d.y);ctx.lineTo(d.x,d.y+d.len);ctx.stroke()});requestAnimationFrame(rain)}
+rain();
+window.onresize=function(){w=canvas.width=window.innerWidth;h=canvas.height=window.innerHeight};
+var navItems=document.querySelectorAll(".nav-item");
+var pages=document.querySelectorAll(".page");
+navItems.forEach(function(item){item.onclick=function(){navItems.forEach(function(i){i.classList.remove("active")});this.classList.add("active");var pageId=this.dataset.page;pages.forEach(function(p){p.classList.remove("active")});document.getElementById("page-"+pageId).classList.add("active")}});
+document.getElementById("openUserModal").onclick=function(){document.getElementById("userModal").classList.add("show")};
+document.getElementById("closeModal").onclick=function(){document.getElementById("userModal").classList.remove("show")};
+document.getElementById("saveInfo").onclick=function(){var avt=document.getElementById("avatarInput").value;var nam=document.getElementById("nameInput").value;if(avt){document.getElementById("topAvatar").querySelector("img").src=avt;document.getElementById("sidebarAvatar").src=avt}if(nam){document.getElementById("topName").innerText=nam;document.getElementById("sidebarName").innerText=nam}document.getElementById("userModal").classList.remove("show")};
 </script>
 </body>
 </html>
-
